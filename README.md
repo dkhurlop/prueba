@@ -4,7 +4,7 @@
 Este es un proyecto de prueba desarrollado con Laravel que implementa un CRUD básico para gestionar coches y propietarios. El diseño se realizó utilizando Bootstrap para una interfaz más atractiva.
 
 1. Clona el repositorio de Laravel desde GitHut
- `git@github.com:dkhurlop/prueba.git`
+`https://github.com/dkhurlop/prueba.git`
 2. Abre el proyecto en tu editor de código y en la terminal ingresa al directorio del proyecto
  `cd php_laravel`
 3. Instala las dependencias de Composer `composer install`
