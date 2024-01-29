@@ -15,7 +15,13 @@ use App\Http\Controllers\PropietarioController;
 */
 
 Route::get('/', [CocheController::class, 'index'])->name('coches.index');
+Route::get('/coches/create', [CocheController::class, 'create'])->name('coches.create');
+Route::post('/coches', [CocheController::class, 'store'])->name('coches.store');
+Route::put('/coches/{id}', [CocheController::class, 'update'])->name('coches.update');
+Route::delete('/coches/{id}', [CocheController::class, 'destroy'])->name('coches.destroy');
 
-Route::resource('coches', CocheController::class);
-Route::resource('propietarios', PropietarioController::class);
+Route::get('/propietarios', [PropietarioController::class, 'index'])->name('propietarios.index');
+Route::get('/propietarios/create', [PropietarioController::class, 'create'])->name('propietarios.create'); 
+Route::post('/propietarios', [PropietarioController::class, 'store'])->name('propietarios.store');
+Route::delete('/propietarios/{id}', [PropietarioController::class, 'destroy'])->name('propietarios.destroy');
 Route::get('/coches/por-propietario/{propietarioId}', [CocheController::class, 'cochesPorPropietario'])->name('coches.por-propietario');

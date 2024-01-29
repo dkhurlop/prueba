@@ -29,25 +29,32 @@ class CocheController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'marca' => 'required|string',
-            'modelo' => 'required|string',
-            'anio' => 'required|integer',
-            'color' => 'required|string',
+            'marca' => 'required|string|max:255',
+            'modelo' => 'required|string|max:255',
+            'anio' => 'required|integer|min:1900|max:2024',
+            'color' => 'required|string|max:255', 
             'id_propietario' => 'required|exists:propietarios,id',
         ]);
-
-        Coche::create($request->all());
+        
+        Coche::create([
+                'marca' => $request->marca,
+                'modelo' => $request->modelo,
+                'anio' => $request->anio,
+                'color' => $request->color,
+                'id_propietario' => $request->id_propietario,
+            ]
+        );
 
         $cochesDelPropietario = Coche::where('id_propietario', $request->id_propietario)->get();
 
-        return redirect()->route('coches.index')->with('success', 'Coche añadido exitosamente.');
-
+        return redirect()->route('coches.index')->with('success', 'Coche creado exitosamente.');
+        
     }
 
     
     public function show(string $id)
     {
-    
+        //
     }
 
     
@@ -62,15 +69,23 @@ class CocheController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'marca' => 'required|string',
-            'modelo' => 'required|string',
-            'anio' => 'required|integer',
+            'marca' => 'required|string|max:255',
+            'modelo' => 'required|string|max:255',
+            'anio' => 'required|integer|min:1900|max:2021',
+            'color' => 'required|string|max:255', 
             'id_propietario' => 'required|exists:propietarios,id',
         ]);
 
         
         $coche = Coche::findOrFail($id);
-        $coche->update($request->all());
+        $coche->update([
+                'marca' => $request->marca,
+                'modelo' => $request->modelo,
+                'anio' => $request->anio,
+                'color' => $request->color,
+                'id_propietario' => $request->id_propietario,
+            ]
+        );
 
         return redirect()->route('coches.index')->with('success', 'Coche actualizado exitosamente.');
     }

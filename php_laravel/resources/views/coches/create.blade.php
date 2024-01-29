@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Añadir Coche</h1>
+
         <form action="{{ route('coches.store') }}" method="POST">
             @csrf
 
@@ -40,67 +41,10 @@
             <button type="submit" class="btn btn-success">Guardar Coche</button>
             <a href="{{ route('coches.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
-
+        <br>
         <h2>Coches del propietario</h2>
-        <ul id="listaCoches">
-            @foreach ($coches as $coche)
-                @if (count($coches) > 0)
-                    @foreach ($coches as $coche)
-                        <li>{{ $coche->marca }} {{ $coche->modelo }} ({{ $coche->anio }})</li>
-                    @endforeach
-                @else
-                    <li>No hay coches registrados para este propietario.</li>
-                @endif
-            @endforeach
+        <ul id="listaCoches"></ul>
+        <p id="noCochesMensaje" style="display: none;">No hay coches registrados para este propietario.</p>
 
-            {{-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> --}}
-
-
-            {{-- <script>
-    
-    var app = new Vue({
-        el: '#app',
-        data: {
-            coches: []
-        },
-        methods: {
-            cargarCoches: function () {
-                const propietarioId = document.getElementById('id_propietario').value;
-
-                axios.get('/coches/por-propietario/' + propietarioId)
-                    .then(response => {
-                        // Actualizar la lista de coches
-                        this.coches = response.data.coches;
-                    })
-                    .catch(error => {
-                        console.error('Error al cargar coches:', error);
-                    });
-            }
-        }
-    });
-</script> --}}
-
-            <script>
-                function cargarCoches() {
-                    const propietarioId = document.getElementById('id_propietario').value;
-
-                    axios.get('/coches/por-propietario/' + propietarioId)
-                        .then(function(response) {
-                            console.log(response.data);
-
-                            let listaCochesHTML = '';
-                            response.data.coches.forEach(coche => {
-                                listaCochesHTML += '<li>' + coche.marca + ' ' + coche.modelo + ' (' + coche.anio +
-                                    ')</li>';
-                            });
-
-                            document.getElementById('listaCoches').innerHTML = listaCochesHTML;
-                        })
-
-                        .catch(function(error) {
-                            console.error('Error al cargar coches:', error);
-                        });
-                }
-            </script>
     </div>
 @endsection
